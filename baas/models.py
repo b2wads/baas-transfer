@@ -8,8 +8,7 @@ class Account(BaseModel):
     cpf: str
     saldo: int
 
-
-class Saque(BaseModel):
-    data: str
+class Transfer(BaseModel):
+    origem: str
+    destino: str
     valor: int
-    account: Optional[Account]

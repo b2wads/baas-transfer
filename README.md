@@ -72,10 +72,10 @@ Todos os testes devem passar.
 
 Temos 4 endpoints para serem implementados nesse projeto:
 
-- `POST /saque/<acc_id>`
-- `GET /saques/<acc_id>`
+- `POST /transfers (grupo 3)`
+- `GET /transfers/<acc_id> (Grupo3)`
 
 Todos os endpoints seguem a mesma estrutura: A função que recebe o request HTTP chama um "Service". Esse service por sua vez chama um storage interno para salvar e pegar os dados. Os testes estão na pasta `tests/`.
 
 
-Os edpoints HTTP já estão implementados e chamando os Services corretos. O que precisa sser feito é preencher o método `SaqueService.save_saque()`. Esse método deve efeutar um saque usando o serviço de account para isso.
+Os endpoints HTTP já estão implementados e chamando os Services corretos. O que precisa sser feito é preencher o método `TransferService.save_transfer()`. Esse método deve efetuar uma transferência usando o serviço de transfer para isso.

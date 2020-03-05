@@ -1,7 +1,7 @@
 from aiohttp.client import ClientSession
 
 from baas.conf import settings
-from baas.models import Account, Saque
+from baas.models import Account
 
 
 class AccountClient:
@@ -25,11 +25,21 @@ class AccountClient:
                 return Account(**data)
 
     @classmethod
-    async def saque(cls, account: Account, saque: Saque) -> Saque:
+    async def debito(cls, account: Account, valor: int) -> Account:
         async with ClientSession() as session:
             async with session.post(
                 f"{settings.ACCOUNT_SERVICE_ADDRESS}/accounts/{account.cpf}/debito",
-                json=saque.dict(),
+                json={"valor": valor},
             ) as resp:
                 data = await resp.json()
-                return Saque(**data)
+                return Account(**data)
+
+    @classmethod
+    async def credito(cls, account: Account, valor: int) -> Account:
+        async with ClientSession() as session:
+            async with session.post(
+                f"{settings.ACCOUNT_SERVICE_ADDRESS}/accounts/{account.cpf}/credito",
+                json={"valor": valor},
+            ) as resp:
+                data = await resp.json()
+                return Account(**data)

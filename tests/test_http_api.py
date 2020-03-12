@@ -1,3 +1,4 @@
+from aioresponses import aioresponses
 from asynctest import TestCase
 from asyncworker.testing import HttpClientContext
 

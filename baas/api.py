@@ -1,5 +1,3 @@
-from typing import List
-
 from aiohttp import web
 from asyncworker import RouteTypes
 
@@ -11,14 +9,14 @@ from baas.services.transfer import TransferService
 
 @app.route(["/transfer/"], type=RouteTypes.HTTP, methods=["POST"])
 @parse_body(Transfer)
-async def transfer(transfer: Transfer) -> Transfer:
+async def transfer(transfer: Transfer):
     t = await TransferService.save_transfer(transfer.origem, transfer)
     return web.json_response(t.dict())
 
 
 @app.route(["/transfers/{acc_id}"], type=RouteTypes.HTTP, methods=["GET"])
 @parse_id(str)
-async def lista_transfers(acc_id: str) -> List[Transfer]:
+async def lista_transfers(acc_id: str):
     transfers = TransferService.list_by_origem_id(acc_id)
     return web.json_response([t.dict() for t in transfers])
 

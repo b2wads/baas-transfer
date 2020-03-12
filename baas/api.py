@@ -8,6 +8,7 @@ from baas.services.transfer import TransferService
 
 
 @app.route(["/transfer/"], type=RouteTypes.HTTP, methods=["POST"])
+@app.route(["/transfers"], type=RouteTypes.HTTP, methods=["POST"])
 @parse_body(Transfer)
 async def transfer(transfer: Transfer):
     t = await TransferService.save_transfer(transfer.origem, transfer)

@@ -4,11 +4,12 @@ from pydantic import BaseModel
 
 
 class Account(BaseModel):
-    nome: str
+    nome: Optional[str]
     cpf: str
-    saldo: int
+    saldo: Optional[int]
+
 
 class Transfer(BaseModel):
-    origem: str
-    destino: str
+    origem: Account
+    destino: Account
     valor: int

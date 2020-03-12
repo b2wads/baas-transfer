@@ -1,7 +1,7 @@
 from collections import defaultdict
 from typing import Optional, List
 
-from baas.models import Transfer
+from baas.models import Transfer, Account
 
 
 class TransferStorage:
@@ -20,7 +20,7 @@ class TransferService:
     storage = TransferStorage()
 
     @classmethod
-    def save_transfer(cls, origem_id: str, transfer: Transfer):
+    def save_transfer(cls, origem: Account, transfer: Transfer):
         raise NotImplementedError
 
     @classmethod

@@ -21,7 +21,9 @@ class TransferService:
 
     @classmethod
     def save_transfer(cls, origem: Account, transfer: Transfer):
-        raise NotImplementedError
+    async def save_transfer(
+        cls, origem: Account, transfer: Transfer
+    ) -> Transfer:
 
     @classmethod
     def list_by_origem_id(cls, origem_id: str):

@@ -14,6 +14,9 @@ class TransferStorage:
     def get_by_origem_id(self, acc_id: str) -> List[Transfer]:
         return self.__data[acc_id] if acc_id in self.__data else []
 
+    def clear(self):
+        self.__data = defaultdict(list)
+
 
 class TransferService:
 

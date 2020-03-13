@@ -25,21 +25,19 @@ class AccountClient:
                 return Account(**data)
 
     @classmethod
-    async def debito(cls, account: Account, valor: int) -> Account:
+    async def debito(cls, account: Account, valor: int):
         async with ClientSession() as session:
             async with session.post(
                 f"{settings.ACCOUNT_SERVICE_ADDRESS}/accounts/{account.cpf}/debito",
                 json={"valor": valor},
             ) as resp:
                 data = await resp.json()
-                return Account(**data)
 
     @classmethod
-    async def credito(cls, account: Account, valor: int) -> Account:
+    async def credito(cls, account: Account, valor: int):
         async with ClientSession() as session:
             async with session.post(
                 f"{settings.ACCOUNT_SERVICE_ADDRESS}/accounts/{account.cpf}/credito",
                 json={"valor": valor},
             ) as resp:
                 data = await resp.json()
-                return Account(**data)

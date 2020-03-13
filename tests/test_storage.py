@@ -9,14 +9,18 @@ class StorageTest(TestCase):
         self.storage = TransferStorage()
 
     async def test_get_by_origem_id(self):
-        transfer = Transfer(origem="1234", destino="4312", valor=123)
-        self.storage.save(transfer.origem, transfer=transfer)
+        transfer = Transfer(
+            origem=Account(cpf="1234"), destino=Account(cpf="4312"), valor=123
+        )
+        self.storage.save(transfer.origem.cpf, transfer=transfer)
         transfers = self.storage.get_by_origem_id("1234")
         self.assertEqual(1, len(transfers))
         self.assertEqual(transfer.dict(), transfers[0].dict())
 
     async def test_get_by_multiple_origem_id(self):
-        transfer = Transfer(origem="1234", destino="4321", valor=123)
+        transfer = Transfer(
+            origem=Account(cpf="1234"), destino=Account(cpf="4321"), valor=123
+        )
         self.storage.save(origem_id="1234", transfer=transfer)
         self.storage.save(origem_id="1234", transfer=transfer)
         self.storage.save(origem_id="2253", transfer=transfer)

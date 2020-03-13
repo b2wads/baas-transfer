@@ -23,7 +23,6 @@ class TransferService:
     storage = TransferStorage()
 
     @classmethod
-    def save_transfer(cls, origem: Account, transfer: Transfer):
     async def save_transfer(
         cls, origem: Account, transfer: Transfer
     ) -> Transfer:

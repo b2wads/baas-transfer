@@ -1,15 +1,23 @@
 version: 2.1
 
 commands:
+  cc-download-binary:
+    description: "Code Climate Download Binary"
+    steps:
+      - run:
+          command: |
+            curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+            chmod +x ./cc-test-reporter
+
+  cc-before-build:
+    description: "Code Climate before-build"
+    steps:
+      - run: "./cc-test-reporter before-build"
+
   all-tests:
     description: "Roda todos os testes do projeto (unitários e integração)"
     steps:
       - run: "pipenv run test"
-
-  test-coverage:
-    description: "Upload unittest coverage data"
-    steps:
-      - run: "pipenv run codecov --flags unittest"
 
 jobs:
   test:
@@ -26,8 +34,12 @@ jobs:
       - run:
           name: Install project in dev-mode
           command: pipenv run pip install -e .
+      - cc-download-binary
+      - cc-before-build
       - all-tests
-      - test-coverage
+      - run:
+          when: on_success
+          command: "./cc-test-reporter after-build --coverage-input-type coverage.py"
 workflows:
   version: 2
   test:

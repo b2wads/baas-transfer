@@ -4,7 +4,7 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-async-worker = "==0.12.0"
+async-worker = "==0.12.1"
 
 [dev-packages]
 asynctest = "==0.12.1"

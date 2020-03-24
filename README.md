@@ -55,7 +55,7 @@ Isso pode ser feito assim:
 echo 'export PATH="$PATH:<HOME>/.local/bin"' >> ~/.bashrc
 ```
 
-Onde `<HOME>` é o seu usuário local. Para descobrir sua home abra um terminal e digite:
+Onde `<HOME>` é a pasta onde ficam seus arquivos e configurações. Para descobrir sua home abra um terminal e digite:
 
 ```
 cd

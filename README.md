@@ -66,16 +66,4 @@ pipenv run test
 
 Todos os testes devem passar.
 
-
-
-# Implementação
-
-Temos 4 endpoints para serem implementados nesse projeto:
-
-- `POST /transfers (grupo 3)`
-- `GET /transfers/<acc_id> (Grupo3)`
-
-Todos os endpoints seguem a mesma estrutura: A função que recebe o request HTTP chama um "Service". Esse service por sua vez chama um storage interno para salvar e pegar os dados. Os testes estão na pasta `tests/`.
-
-
-Os endpoints HTTP já estão implementados e chamando os Services corretos. O que precisa sser feito é preencher o método `TransferService.save_transfer()`. Esse método deve efetuar uma transferência usando o serviço de transfer para isso.
+Você deve ver uma pensagem desse tipo, no final do output: `14 passed, 4 warnings in 0.40s`.

@@ -85,3 +85,50 @@ pipenv run test
 Todos os testes devem passar.
 
 Você deve ver uma pensagem desse tipo, no final do output: `14 passed, 4 warnings in 0.40s`.
+
+Esse é um exemplo de output:
+
+```
+$ pipenv run test
+===================================================================================== test session starts =====================================================================================
+platform linux -- Python 3.7.5, pytest-5.2.1, py-1.8.1, pluggy-0.13.1 -- /home/daltonmatos/.local/share/virtualenvs/baas-transfer-RPlrfRcH/bin/python3
+cachedir: .pytest_cache
+rootdir: /home/daltonmatos/src/baas-transfer
+plugins: cov-2.8.1
+collected 14 items
+
+tests/test_clients.py::AccountClientTest::test_credito PASSED
+tests/test_clients.py::AccountClientTest::test_debito PASSED
+tests/test_clients.py::AccountClientTest::test_get_by_id PASSED
+tests/test_clients.py::AccountClientTest::test_update_account PASSED
+tests/test_decorators.py::HTTPDecoratorsTest::test_parse_body PASSED
+tests/test_decorators.py::HTTPRouteDecoratorTest::test_can_return_list_of_pydnatic_models PASSED
+tests/test_decorators.py::HTTPRouteDecoratorTest::test_can_return_optional_model PASSED
+tests/test_decorators.py::HTTPRouteDecoratorTest::test_can_return_pydantic_model PASSED
+tests/test_decorators.py::HTTPRouteDecoratorTest::test_can_use_other_http_methods PASSED
+tests/test_decorators.py::HTTPRouteDecoratorTest::test_registers_http_route PASSED
+tests/test_http_api.py::TransferAPITest::test_health PASSED
+tests/test_storage.py::StorageTest::test_get_by_multiple_origem_id PASSED
+tests/test_storage.py::StorageTest::test_get_by_origem_id PASSED
+tests/test_storage.py::StorageTest::test_get_by_origem_id_empty_list PASSED
+
+----------- coverage: platform linux, python 3.7.5-final-0 -----------
+Name                        Stmts   Miss  Cover   Missing
+---------------------------------------------------------
+baas/__init__.py                0      0   100%
+baas/api.py                    15      2    87%   14, 19
+baas/app.py                    24      0   100%
+baas/clients/__init__.py        0      0   100%
+baas/clients/account.py        26      6    77%   29-34, 38-43
+baas/conf.py                    7      0   100%
+baas/http/__init__.py          12      0   100%
+baas/models.py                 10      0   100%
+baas/services/__init__.py       0      0   100%
+baas/services/transfer.py      18      1    94%   18
+---------------------------------------------------------
+TOTAL                         112      9    92%
+Coverage XML written to file coverage.xml
+
+=============================================================================== 14 passed, 4 warnings in 0.36s ================================================================================
+
+```

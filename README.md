@@ -20,9 +20,11 @@ Resumindo, esses são os passos:
 Se você estiver usando outro shell que não seja o bash precisará substituir o `~/.bashrc` pelo arquivo
 de configuração do seu shell.
 
+Depois dessa instalação, abra um novo terminal para que essas modificações tenham efeito.
+
 ## Instalando python
 
-Depois que o pyenvf estiver funcionando é hora de instalar uma versão do python. Para esse projeto podemos
+Depois que o pyenv estiver funcionando é hora de instalar uma versão do python. Para esse projeto podemos
 usar python 3.7.5. Para instalar rode:
 
 ```
@@ -46,11 +48,27 @@ Para instalar o pipenv rode:
 pip install --user pipenv
 ```
 
-A partir desse momento você já pode rodar `pipenv` no terminal.
+Quando instalamos com `--user` os binários vão para `${HOME}/.local/bin` então é importante adicionar essa pasta em seu `$PATH`.
+Isso pode ser feito assim:
+
+```
+echo 'export PATH="$PATH:<HOME>/.local/bin"' >> ~/.bashrc
+```
+
+Onde `<HOME>` é a pasta onde ficam seus arquivos e configurações. Para descobrir sua home abra um terminal e digite:
+
+```
+cd
+pwd
+```
+
+Isso deve imprimir o endereço da sua home.
+
+A partir dos próximos terminais abertos você já poderá rodar `pipenv` no terminal.
 
 # Instalando o projeto
 
-Entre na pasta do projeto e digite:
+Depois de fazer o clone desse projeto, entre na pasta onde está o código e digite:
 
 ```
 pipenv install --dev
@@ -66,16 +84,51 @@ pipenv run test
 
 Todos os testes devem passar.
 
+Você deve ver uma pensagem desse tipo, no final do output: `14 passed, 4 warnings in 0.40s`.
 
+Esse é um exemplo de output:
 
-# Implementação
+```
+$ pipenv run test
+===================================================================================== test session starts =====================================================================================
+platform linux -- Python 3.7.5, pytest-5.2.1, py-1.8.1, pluggy-0.13.1 -- /home/daltonmatos/.local/share/virtualenvs/baas-transfer-RPlrfRcH/bin/python3
+cachedir: .pytest_cache
+rootdir: /home/daltonmatos/src/baas-transfer
+plugins: cov-2.8.1
+collected 14 items
 
-Temos 4 endpoints para serem implementados nesse projeto:
+tests/test_clients.py::AccountClientTest::test_credito PASSED
+tests/test_clients.py::AccountClientTest::test_debito PASSED
+tests/test_clients.py::AccountClientTest::test_get_by_id PASSED
+tests/test_clients.py::AccountClientTest::test_update_account PASSED
+tests/test_decorators.py::HTTPDecoratorsTest::test_parse_body PASSED
+tests/test_decorators.py::HTTPRouteDecoratorTest::test_can_return_list_of_pydnatic_models PASSED
+tests/test_decorators.py::HTTPRouteDecoratorTest::test_can_return_optional_model PASSED
+tests/test_decorators.py::HTTPRouteDecoratorTest::test_can_return_pydantic_model PASSED
+tests/test_decorators.py::HTTPRouteDecoratorTest::test_can_use_other_http_methods PASSED
+tests/test_decorators.py::HTTPRouteDecoratorTest::test_registers_http_route PASSED
+tests/test_http_api.py::TransferAPITest::test_health PASSED
+tests/test_storage.py::StorageTest::test_get_by_multiple_origem_id PASSED
+tests/test_storage.py::StorageTest::test_get_by_origem_id PASSED
+tests/test_storage.py::StorageTest::test_get_by_origem_id_empty_list PASSED
 
-- `POST /transfers (grupo 3)`
-- `GET /transfers/<acc_id> (Grupo3)`
+----------- coverage: platform linux, python 3.7.5-final-0 -----------
+Name                        Stmts   Miss  Cover   Missing
+---------------------------------------------------------
+baas/__init__.py                0      0   100%
+baas/api.py                    15      2    87%   14, 19
+baas/app.py                    24      0   100%
+baas/clients/__init__.py        0      0   100%
+baas/clients/account.py        26      6    77%   29-34, 38-43
+baas/conf.py                    7      0   100%
+baas/http/__init__.py          12      0   100%
+baas/models.py                 10      0   100%
+baas/services/__init__.py       0      0   100%
+baas/services/transfer.py      18      1    94%   18
+---------------------------------------------------------
+TOTAL                         112      9    92%
+Coverage XML written to file coverage.xml
 
-Todos os endpoints seguem a mesma estrutura: A função que recebe o request HTTP chama um "Service". Esse service por sua vez chama um storage interno para salvar e pegar os dados. Os testes estão na pasta `tests/`.
+=============================================================================== 14 passed, 4 warnings in 0.36s ================================================================================
 
-
-Os endpoints HTTP já estão implementados e chamando os Services corretos. O que precisa sser feito é preencher o método `TransferService.save_transfer()`. Esse método deve efetuar uma transferência usando o serviço de transfer para isso.
+```

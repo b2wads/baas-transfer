@@ -20,9 +20,11 @@ Resumindo, esses são os passos:
 Se você estiver usando outro shell que não seja o bash precisará substituir o `~/.bashrc` pelo arquivo
 de configuração do seu shell.
 
+Depois dessa instalação, abra um novo terminal para que essas modificações tenham efeito.
+
 ## Instalando python
 
-Depois que o pyenvf estiver funcionando é hora de instalar uma versão do python. Para esse projeto podemos
+Depois que o pyenv estiver funcionando é hora de instalar uma versão do python. Para esse projeto podemos
 usar python 3.7.5. Para instalar rode:
 
 ```
@@ -46,11 +48,27 @@ Para instalar o pipenv rode:
 pip install --user pipenv
 ```
 
-A partir desse momento você já pode rodar `pipenv` no terminal.
+Quando instalamos com `--user` os binários vão para `${HOME}/.local/bin` então é importante adicionar essa pasta em seu `$PATH`.
+Isso pode ser feito assim:
+
+```
+echo 'export PATH="$PATH:<HOME>/.local/bin"' >> ~/.bashrc
+```
+
+Onde `<HOME>` é o seu usuário local. Para descobrir sua home abra um terminal e digite:
+
+```
+cd
+pwd
+```
+
+Isso deve imprimir o endereço da sua home.
+
+A partir dos próximos terminais abertos você já poderá rodar `pipenv` no terminal.
 
 # Instalando o projeto
 
-Entre na pasta do projeto e digite:
+Depois de fazer o clone desse projeto, entre na pasta onde está o código e digite:
 
 ```
 pipenv install --dev

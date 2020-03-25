@@ -2,6 +2,40 @@
 
 O objetivo desse projeto é ensinar um pouco sobre testes. Esse projeto é usado na aula de testes do programa de estágio da B2W Digital.
 
+
+# Modelos usados no projeto
+
+O Projeto possui dois modelos: `Transfer` e `Account`:
+
+```python
+class Account(BaseModel):
+    nome: Optional[str]
+    cpf: str
+    saldo: Optional[int]
+
+
+class Transfer(BaseModel):
+    origem: Account
+    destino: Account
+    valor: int
+```
+
+O modelo principal é o `Transfer` que é usado nos endpoints do projeto.
+
+## Endpoints HTTP
+
+O projeto possui os seguintes endpoints:
+
+- `POST /transfers`: Registra uma nova transferência. Recebe um pbjeto `Transfer` no copro do request;
+- `GET /transfers/{acc_id}`: Lista todas as transferências que possuem `acc_id` com conta de origem.
+
+## Funcionalidades
+
+- Registrar uma nova transferência entre duas contas
+- Lista todas as transferências saintes de uma mesma conta
+
+
+
 # Rodando o projeto localmente
 
 Para rodar o projeto localmente você precisará do `pyenv` e `pipenv`
